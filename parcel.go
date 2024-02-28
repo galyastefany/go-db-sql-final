@@ -2,8 +2,6 @@ package main
 
 import (
 	"database/sql"
-
-	_ "modernc.org/sqlite"
 )
 
 type ParcelStore struct {
@@ -19,7 +17,7 @@ func (s ParcelStore) Add(p Parcel) (int, error) {
 	res, err := s.db.Exec("insert into parcel (client, status, address, created_at) values (:client,:status, :address, :created_at)",
 		sql.Named("client", p.Client),
 		sql.Named("status", p.Status),
-		sql.Named("address", p.Status),
+		sql.Named("address", p.Address),
 		sql.Named("created_at", p.CreatedAt))
 
 	if err != nil {
