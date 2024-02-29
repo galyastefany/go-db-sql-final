@@ -54,7 +54,7 @@ func TestAddGetDelete(t *testing.T) {
 	require.NoError(t, err)
 
 	_, err = store.Get(p)
-	require.ErrorIs(t, sql.ErrNoRows, err)
+	require.ErrorIs(t, err, sql.ErrNoRows)
 }
 
 // TestSetAddress проверяет обновление адреса
@@ -147,6 +147,7 @@ func TestGetByClient(t *testing.T) {
 
 	// get by client
 	storedParcels, err := store.GetByClient(client)
+	require.NoError(t, err)
 	require.Equal(t, len(parcels), len(storedParcels))
 
 	// check
